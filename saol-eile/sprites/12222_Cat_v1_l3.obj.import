@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b48e5cc661c6n"
+path="res://.godot/imported/12222_Cat_v1_l3.obj-baca32af8d2df3e7c18b6ca082c1f35e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/12222_Cat_v1_l3.obj-baca32af8d2df3e7c18b6ca082c1f35e.mesh"]
+
+source_file="res://sprites/12222_Cat_v1_l3.obj"
+dest_files=["res://.godot/imported/12222_Cat_v1_l3.obj-baca32af8d2df3e7c18b6ca082c1f35e.mesh", "res://.godot/imported/12222_Cat_v1_l3.obj-baca32af8d2df3e7c18b6ca082c1f35e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
