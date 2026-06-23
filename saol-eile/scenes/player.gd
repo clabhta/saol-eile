@@ -21,6 +21,9 @@ func _physics_process(delta: float) -> void:
 	
 	input_dir = input_dir.normalized()
 	
+	if input_dir.length() > 0:
+		rotation.y = atan2(input_dir.x, input_dir.z)
+	
 	velocity.x = input_dir.x * speed
 	velocity.z = input_dir.z * speed
 	
