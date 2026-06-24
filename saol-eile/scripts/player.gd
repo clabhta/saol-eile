@@ -3,6 +3,9 @@ extends CharacterBody3D
 @export var speed = 5.0
 @export var gravity = 20.0
 
+# signal for $targetMarker visibility
+signal targetMarkerFalse
+
 # clicked move destination
 var targetPos: Vector3
 var moving = false
@@ -37,6 +40,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 		velocity.z = 0
 		moving = false
+		targetMarkerFalse.emit()
 		#targetPos = global_position
 	
 	# gravity applied

@@ -1,21 +1,20 @@
 [gd_scene format=3 uid="uid://djf0f6ingnnji"]
 
-[ext_resource type="Texture2D" uid="uid://brugg5uiwa8yf" path="res://sprites/image.png" id="1_4wyf3"]
 [ext_resource type="Script" uid="uid://ce16uqbdwcggy" path="res://scripts/world.gd" id="1_71j4m"]
 [ext_resource type="Script" uid="uid://cthr3eimq4r5u" path="res://scripts/player.gd" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://owxdq20x4x08" path="res://scripts/terrain.gd" id="2_71j4m"]
 [ext_resource type="ArrayMesh" uid="uid://b48e5cc661c6n" path="res://sprites/12222_Cat_v1_l3.obj" id="2_rwgxs"]
 [ext_resource type="Script" uid="uid://csgn1q7xdl60j" path="res://scripts/camera_pivot.gd" id="4_k0juu"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvuie"]
-albedo_texture = ExtResource("1_4wyf3")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
-material = SubResource("StandardMaterial3D_lvuie")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
-size = Vector3(100, 1, 100)
+[sub_resource type="BoxShape3D" id="BoxShape3D_yf5fn"]
+size = Vector3(32, 0.2, 32)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_g4v7s"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.03
 
 [node name="world" type="Node3D" unique_id=1896738611]
 script = ExtResource("1_71j4m")
@@ -24,15 +23,14 @@ script = ExtResource("1_71j4m")
 transform = Transform3D(-0.9631626, -0.2443158, 0.112372704, 0, 0.41786703, 0.9085082, -0.26891977, 0.8750411, -0.4024739, 0, 0, 0)
 shadow_enabled = true
 
-[node name="ground" type="StaticBody3D" parent="." unique_id=2127330873]
+[node name="terrain" type="MeshInstance3D" parent="." unique_id=1147899163]
+script = ExtResource("2_71j4m")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ground" unique_id=835472323]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
-mesh = SubResource("PlaneMesh_g4v7s")
+[node name="StaticBody3D" type="StaticBody3D" parent="terrain" unique_id=1620981396]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ground" unique_id=1842418515]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
-shape = SubResource("BoxShape3D_g4v7s")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="terrain/StaticBody3D" unique_id=1768340035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -0.1, 16)
+shape = SubResource("BoxShape3D_yf5fn")
 
 [node name="player" type="CharacterBody3D" parent="." unique_id=1900576289]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.10536, 0)
@@ -51,5 +49,8 @@ script = ExtResource("4_k0juu")
 target = NodePath("../player")
 
 [node name="Camera3D" type="Camera3D" parent="cameraPivot" unique_id=2101883238]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
 current = true
+
+[node name="targetMarker" type="MeshInstance3D" parent="." unique_id=1372692144]
+mesh = SubResource("CylinderMesh_g4v7s")

@@ -2,6 +2,13 @@ extends Node3D
 
 @onready var camera: Camera3D = $cameraPivot/Camera3D
 @onready var player: CharacterBody3D = $player
+@onready var targetMarker = $targetMarker
+
+func _ready():
+	player.targetMarkerFalse.connect(targetMarkerFalsify)
+	
+func targetMarkerFalsify():
+	targetMarker.visible = false
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -16,4 +23,13 @@ func _unhandled_input(event):
 			var result = get_world_3d().direct_space_state.intersect_ray(query)
 			
 			if result:
-				player.move_to_position(result.position)
+				var target = result.position
+				
+				target.x = floor(target.x) + 0.5
+				target.z = floor(target.z) + 0.5
+				target.y = player.global_position.y
+				
+				targetMarker.global_position = Vector3(target.x, 0.03, target.z)
+				targetMarker.visible = true
+				
+				player.move_to_position(target)
