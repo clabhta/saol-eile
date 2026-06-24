@@ -15,14 +15,14 @@ func generate_mesh():
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
 	
-	for a in range(height + 1):
-		for b in range(width + 1):
-			vertices.append(Vector3(b * tileSize, 0, a * tileSize))
-			uvs.append(Vector2(b, a))
+	for z in range(height + 1):
+		for x in range(width + 1):
+			vertices.append(Vector3(x * tileSize, 0, z * tileSize))
+			uvs.append(Vector2(x, z))
 	
-	for a in range(height):
-		for b in range(width):
-			var i = a * (width + 1) + b
+	for z in range(height):
+		for x in range(width):
+			var i = z * (width + 1) + x
 			indices.append_array([
 				i, i + 1, i + width + 1,
 				i + 1, i + width + 2, i + width + 1
@@ -43,3 +43,12 @@ func generate_mesh():
 	
 	meshNew.surface_set_material(0, mat)
 	mesh = meshNew
+
+func world_to_tile(pos: Vector3) -> Vector2i:
+	return Vector2i(
+		floor(pos.x / tileSize), floor(pos.z / tileSize)
+	)
+func tile_to_world(tile: Vector2i) -> Vector3:
+	return Vector3(
+		(tile.x + 0.5) * tileSize, 0, (tile.y + 0.5) * tileSize
+	)

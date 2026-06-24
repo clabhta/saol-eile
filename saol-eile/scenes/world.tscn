@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cthr3eimq4r5u" path="res://scripts/player.gd" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://owxdq20x4x08" path="res://scripts/terrain.gd" id="2_71j4m"]
 [ext_resource type="ArrayMesh" uid="uid://b48e5cc661c6n" path="res://sprites/12222_Cat_v1_l3.obj" id="2_rwgxs"]
+[ext_resource type="Script" uid="uid://c1y857frcjxxv" path="res://scripts/tile_data.gd" id="3_qfnet"]
 [ext_resource type="Script" uid="uid://csgn1q7xdl60j" path="res://scripts/camera_pivot.gd" id="4_k0juu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yf5fn"]
@@ -11,10 +12,22 @@ size = Vector3(32, 0.2, 32)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4v7s"]
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_g4v7s"]
+material = SubResource("StandardMaterial3D_g4v7s")
 top_radius = 0.3
 bottom_radius = 0.3
 height = 0.03
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qfnet"]
+transparency = 1
+albedo_color = Color(1, 1, 0, 0.039215688)
+emission_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_71j4m"]
+material = SubResource("StandardMaterial3D_qfnet")
+size = Vector2(1, 1)
 
 [node name="world" type="Node3D" unique_id=1896738611]
 script = ExtResource("1_71j4m")
@@ -31,6 +44,9 @@ script = ExtResource("2_71j4m")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="terrain/StaticBody3D" unique_id=1768340035]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -0.1, 16)
 shape = SubResource("BoxShape3D_yf5fn")
+
+[node name="tileData" type="Node" parent="." unique_id=778063917]
+script = ExtResource("3_qfnet")
 
 [node name="player" type="CharacterBody3D" parent="." unique_id=1900576289]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.10536, 0)
@@ -54,3 +70,7 @@ current = true
 
 [node name="targetMarker" type="MeshInstance3D" parent="." unique_id=1372692144]
 mesh = SubResource("CylinderMesh_g4v7s")
+
+[node name="hoverMarker" type="MeshInstance3D" parent="." unique_id=345499640]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh = SubResource("PlaneMesh_71j4m")
